@@ -72,6 +72,8 @@ const char* getOpCodeName(OpCode op) {
         case OpCode::BREAK: return "BREAK";
         case OpCode::CONTINUE: return "CONTINUE";
         case OpCode::TYPEOF: return "TYPEOF";
+        case OpCode::AWAIT: return "AWAIT";
+        case OpCode::ASYNC_CALL: return "ASYNC_CALL";
         case OpCode::HALT: return "HALT";
         default: return "UNKNOWN";
     }
@@ -107,6 +109,12 @@ std::string formatInstruction(const Instruction& instr, const BytecodeProgram& p
             ss << " +" << instr.operand;
             break;
         case OpCode::CALL:
+            ss << " " << instr.operand << " args";
+            break;
+        case OpCode::AWAIT:
+            ss << " slot:" << instr.operand;
+            break;
+        case OpCode::ASYNC_CALL:
             ss << " " << instr.operand << " args";
             break;
         case OpCode::CLOSURE:
